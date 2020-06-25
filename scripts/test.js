@@ -1,15 +1,11 @@
 const csvtojson = require('csvtojson');
 
+const { models } = require("./index");
+let sequelize = models.sequelize;
 
-const init = async () => {
-  readCsv();
-};
-
-const csvFilePath = '/home/christopher/test.csv';
-
-let trailList;
-trailList = [];
 const readCsv = async () => {
+  let csvFilePath = `${__dirname}/../csv/read/test.csv`;
+
   csvtojson({
     // noheader: true,
     delimiter: [","]
@@ -18,14 +14,13 @@ const readCsv = async () => {
       // console.log(jsonObj);
       for (let i = 0; i < jsonObj.length; ++i) {
         // console.log(i);
-        // console.log();
-        trailList.push(jsonObj[i]['trailId']);
         // break;
       }
-      let trailStr = trailList.join(",");
-      console.log(trailStr);
     });
 };
 
+const init = async () => {
+  readCsv();
+};
 
 init();
